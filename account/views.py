@@ -2,13 +2,18 @@ from django.shortcuts import render, redirect
 from .forms import UserProfileForm
 
 from rest_framework import viewsets
+from django.views.decorators.http import require_http_methods
+
 from .models import UserProfile
 from .serializers import UserProfileSerializer
+
 
 class UserProfileViewSet(viewsets.ModelViewSet):
     queryset = UserProfile.objects.all()
     serializer_class = UserProfileSerializer
 
+
+@require_http_methods(['POST'])
 def user_profile(request):
     if request.method == 'POST':
         form = UserProfileForm(request.POST)
