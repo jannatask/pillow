@@ -88,14 +88,16 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('DB_NAME'),
-        'USER': config('DB_USER'),
-        'PASSWORD': config('DB_PASSWORD'),
-        'HOST': config('DB_HOST'),
-        'PORT': config('DB_PORT')
+        'NAME': config('hakka_db'),
+        'USER': config('hello'),
+        'PASSWORD': config('1'),
+        'HOST': config('localhost'),
+        'PORT': config('5432')
+
     }
 }
 
@@ -161,6 +163,10 @@ SIMPLE_JWT = {
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1)
 }
 
+import os
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 
 CORS_ALLOWD_ORIGINS = [
     "localhost:3000" # те хосты, которым разрешено отправлять запросы, узнавать эти хосты нужно у фронтэндщиков
